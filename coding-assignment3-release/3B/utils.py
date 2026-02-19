@@ -1,5 +1,6 @@
 import torch
-from tqdm.notebook import tqdm
+# from tqdm.notebook import tqdm
+from tqdm import tqdm
 from torch.nn import functional as F
 from dataset import getBatch
 import pickle
@@ -33,7 +34,7 @@ def train(model, train_config):
     for step in pbar:
         if step % train_config.eval_interval == 0 or step == train_config.max_iters - 1:
             losses = validation(model,train_config)
-            pbar.set_postfix_str(f'Training Loss: {round(losses['train'].item(), 3)} Validation Loss: {round(losses['valid'].item(), 3)}')
+            pbar.set_postfix_str(f"Training Loss: {round(losses['train'].item(), 3)} Validation Loss: {round(losses['valid'].item(), 3)}")
             pbar.refresh()
             del losses
             gc.collect()
